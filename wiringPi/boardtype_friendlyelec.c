@@ -151,7 +151,14 @@ static int getFieldValueInCpuInfo(char* hardware, int hardwareMaxLen, char* revi
 
 static int getAllwinnerBoardID(char* boardId, int boardIdMaxLen )
 {
-    unsigned long n, i, j;
+    // Nano Pi Neo Core: /sys/class/sunxi_info/sys_info
+    // sunxi_board_id : 5(0)
+    // sunxi_platform : sun8iw7p1
+    // board_manufacturer : FriendlyElec
+    strncpy(boardId, "5(0)\0", 5);
+    return 0;
+
+    /*unsigned long n, i, j;
     char lineUntrim[1024], line[1024], *p;
     const char* sunxi_board_id_fieldname = "sunxi_board_id";
     FILE *f;
@@ -196,7 +203,7 @@ static int getAllwinnerBoardID(char* boardId, int boardIdMaxLen )
         }
     }
     fclose(f);
-    return ret;
+    return ret;*/
 }
 
 int getBoardType(BoardHardwareInfo** retBoardInfo) {
